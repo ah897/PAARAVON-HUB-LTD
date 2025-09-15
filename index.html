@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARAVON HUB LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --primary: #4a154b;
+            --secondary: #f86464;
+            --accent: #2abdb3;
+            --light: #f9f9f9;
+            --dark: #333;
+        }
+        
+        html, body {
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: var(--primary);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        /* Header Styles */
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo img {
+            height: 40px;
+            max-width: 100%;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--primary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .hero-image {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 90%;
+            max-width: 50%;
+            opacity: 0.9;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Store Platforms Section - MOVED UP */
+        .stores-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            text-align: center;
+        }
+        
+        .stores-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .store-box {
+            width: 250px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .store-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .store-box img {
+            height: 60px;
+            max-width: 100%;
+            margin-bottom: 20px;
+            object-fit: contain;
+        }
+        
+        .store-box h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        
+        .store-box p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        /* About Section */
+        .about-section {
+            background: white;
+        }
+        
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .about-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            animation: fadeIn 2s ease;
+        }
+        
+        .about-content {
+            flex: 1;
+        }
+        
+        .about-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+        }
+        
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            color: #555;
+        }
+        
+        .quote {
+            font-style: italic;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 5px solid var(--secondary);
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        /* Social Media Section - MOVED DOWN */
+        .social-section {
+            background: white;
+            text-align: center;
+        }
+        
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .social-box {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+        
+        .social-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            animation: none;
+        }
+        
+        .social-box i {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        
+        .social-box.twitter i {
+            color: #000000; /* X/Twitter brand color */
+        }
+        
+        .social-box.linkedin i {
+            color: #0077b5; /* LinkedIn brand color */
+        }
+        
+        .social-box h3 {
+            font-size: 18px;
+            color: var(--dark);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 22px;
+        }
+        
+        .footer-section p, .footer-section li {
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+        }
+        
+        /* Popup Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .modal-close:hover {
+            color: var(--secondary);
+        }
+        
+        .modal-icon {
+            text-align: center;
+            font-size: 60px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .modal-message {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .modal-btn.primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .modal-btn.primary:hover {
+            background-color: var(--secondary);
+        }
+        
+        .modal-btn.secondary {
+            background-color: #f1f1f1;
+            color: #333;
+        }
+        
+        .modal-btn.secondary:hover {
+            background-color: #e5e5e5;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+           50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h2 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                opacity: 0.4;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+            
+            .social-box, .store-box {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .social-box i {
+                font-size: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                text-align: center;
+                gap: 15px;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .header-container {
+                padding: 15px 0;
+            }
+            
+            .hero {
+                text-align: center;
+                min-height: 70vh;
+            }
+            
+            .hero-content {
+                margin: 0 auto;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-image {
+                display: none;
+            }
+            
+            .social-container, .stores-container {
+                gap: 20px;
+            }
+            
+            .social-box, .store-box {
+                width: 100%;
+                max-width: 250px;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            section {
+                padding: 60px 0;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+            
+            .social-box, .store-box {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .social-box i {
+                font-size: 35px;
+            }
+            
+            .social-box h3 {
+                font-size: 16px;
+            }
+            
+            .store-box {
+                padding: 20px;
+            }
+            
+            .about-content h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Paravon Hub Logo">
+                <h1>PARAVON HUB</h1>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#stores">Our Stores</a></li>
+                    <li><a href="#social">Social Media</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Elevate Your Style</h2>
+                <p>Welcome to Paravon Hub, where fashion meets affordability. Discover the latest trends and timeless classics for every occasion.</p>
+                <a href="#stores" class="btn">Shop Now</a>
+            </div>
+        </div>
+        <img class="hero-image" src="assets/logo.png" alt="Fashion Illustration">
+    </section>
+
+    <!-- Store Platforms Section - MOVED UP -->
+    <section class="stores-section" id="stores">
+        <div class="container">
+            <h2>Shop From Our Stores</h2>
+            <p>We're available on all major platforms for your convenience</p>
+            <div class="stores-container">
+                <div class="store-box">
+                    <img src="assets/amazon.png" alt="Amazon">
+                    <h3>Amazon</h3>
+                    <p>Shop our extensive collection on Amazon with fast delivery</p>
+                    <a href="https://www.amazon.co.uk/" class="btn store-link" data-store="Amazon">Visit Store</a>
+                </div>
+                <div class="store-box">
+                    <img src="assets/EBay.png" alt="eBay">
+                    <h3>eBay</h3>
+                    <p>Find great deals on our products with eBay's bidding system</p>
+                    <a href="https://www.ebay.com/" class="btn store-link" data-store="eBay">Visit Store</a>
+                </div>
+                <div class="store-box">
+                    <img src="assets/Shopify.png" alt="Shopify">
+                    <h3>Shopify</h3>
+                    <p>Explore our exclusive collections on our Shopify store</p>
+                    <a href="#" class="btn store-link" data-store="Shopify">Visit Store</a>
+                </div>
+                <div class="store-box">
+                    <img src="assets/tiktok.png" alt="TikTok Shop">
+                    <h3>TikTok Shop</h3>
+                    <p>Discover trending products on our TikTok Shop store</p>
+                    <a href="#" class="btn store-link" data-store="TikTok Shop">Visit Store</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container about-container">
+            <div class="about-image">
+                <img src="assets/logo.png" alt="Company Logo">
+                <p>Thank you for choosing Paravon Hub LTD. We're excited to be part of your shopping journey!</p>
+            </div>
+            <div class="about-content">
+                <h2>About Paravon Hub</h2>
+                <p>We started Paravon Hub with one clear goal: to make shopping simple, reliable, and enjoyable for everyone. In today's fast-paced world, people want quality products they can trust, delivered right to their doorsteps. That's where we come in.</p>
+                <p>At Paravon Hub, we bring together a wide range of products from everyday essentials to trending items so you can find everything you need in one place. Whether you shop with us on Amazon, eBay, TikTok Shop, or our Shopify store, we're committed to giving you great value, reliable service, and a seamless shopping experience.</p>
+                <p>The name Paravon Hub stands for excellence, and that's exactly what we aim to deliver every order, every time. As we continue to grow, our mission remains the same: to provide products that make life easier, better, and more enjoyable for our customers.</p>
+                <div class="quote">
+                    <p>"Fashion is not something that exists in dresses only. Fashion is in the sky, in the street, fashion has to do with ideas, the way we live, what is happening." - Coco Chanel</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section - MOVED DOWN -->
+    <section class="social-section" id="social">
+        <div class="container">
+            <h2>Follow Us On Social Media</h2>
+            <p>Stay updated with our latest collections and exclusive offers</p>
+            <div class="social-container">
+                <div class="social-box twitter">
+                    <i class="fab fa-twitter"></i>
+                    <h3>Twitter</h3>
+                </div>
+                <div class="social-box linkedin">
+                    <i class="fab fa-linkedin"></i>
+                    <h3>LinkedIn</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Office 14373, 182–184 High Street North, East Ham, United Kingdom</p>
+                <p><i class="fas fa-phone"></i> +44 73 6706 2480</p>
+                <p><i class="fas fa-envelope"></i> paravon.ltd@gmail.com</p>
+                <div class="social-links">
+                    <a href="https://x.com/paravonhubltd?s=21"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/paravonhubltd/"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#stores">Our Stores</a></li>
+                    <li><a href="#social">Social Media</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Paravon Hub LTD. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Popup Modal -->
+    <div class="modal-overlay" id="storeModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-icon">
+                <i class="fas fa-store"></i>
+            </div>
+            <h2 class="modal-title">Store Coming Soon</h2>
+            <p class="modal-message" id="modalMessage">
+                This store is currently not available but will be coming soon! 
+                Kindly fill out the form on our contact page and we will update 
+                you when this store becomes available.
+            </p>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="goToContact">Contact Us</button>
+                <button class="modal-btn secondary" id="closeModal">Maybe Later</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple animation for page elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = `fadeIn 1s ease forwards`;
+                        entry.target.style.opacity = 1;
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe all sections for animation
+            document.querySelectorAll('section').forEach(section => {
+                section.style.opacity = 0;
+                observer.observe(section);
+            });
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                
+                // Change icon based on menu state
+                const icon = mobileMenuBtn.querySelector('i');
+                if (navMenu.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                });
+            });
+            
+            // Add click functionality to social boxes
+            const socialBoxes = document.querySelectorAll('.social-box');
+            socialBoxes.forEach(box => {
+                box.addEventListener('click', function() {
+                    let url;
+                    if (this.classList.contains('twitter')) {
+                        url = 'https://x.com/paravonhubltd?s=21';
+                    } else if (this.classList.contains('linkedin')) {
+                        url = 'https://www.linkedin.com/company/paravonhubltd/';
+                    }
+                    
+                    if (url) {
+                        window.open(url, '_blank');
+                    }
+                });
+            });
+            
+            // Store availability popup functionality
+            const modal = document.getElementById('storeModal');
+            const modalClose = document.getElementById('modalClose');
+            const closeModalBtn = document.getElementById('closeModal');
+            const goToContactBtn = document.getElementById('goToContact');
+            const modalMessage = document.getElementById('modalMessage');
+            const storeLinks = document.querySelectorAll('.store-link');
+            
+            // Function to open modal
+            function openModal(storeName) {
+                modalMessage.innerHTML = `The <strong>${storeName}</strong> store is currently not available but will be coming soon! 
+                Kindly fill out the form on our contact page and we will update 
+                you when this store becomes available.`;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            }
+            
+            // Function to close modal
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Enable scrolling
+            }
+            
+            // Add click event to store links
+            storeLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const storeName = this.getAttribute('data-store');
+                    openModal(storeName);
+                });
+            });
+            
+            // Close modal events
+            modalClose.addEventListener('click', closeModal);
+            closeModalBtn.addEventListener('click', closeModal);
+            
+            // Go to contact page
+            goToContactBtn.addEventListener('click', function() {
+                window.location.href = 'contact.html';
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
