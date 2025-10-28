@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paravon Hub - Simple, Reliable Shopping</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #4072AF; /* Updated to your logo color */
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #1a2530;
+            --text: #333;
+            --text-light: #7f8c8d;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            max-width: 600px;
+            margin: 20px auto 0;
+            color: var(--text-light);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-text span {
+            color: var(--secondary); /* Updated to your logo color */
+        }
+
+        /* Navigation - Moved to Left Side */
+        nav {
+            flex: 1;
+            margin-left: 40px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-right: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary); /* Updated to your logo color */
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, var(--secondary), var(--accent)); /* Updated to your logo color */
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            padding: 150px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.05" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,138.7C960,139,1056,181,1152,197.3C1248,213,1344,203,1392,197.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .logo-animation {
+            margin-top: 60px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .animated-logo {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.9);
+            animation: pulse 2s infinite;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0.9;
+            }
+        }
+
+        /* Stores Section - 1st */
+        .stores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .store-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--secondary), var(--accent)); /* Updated to your logo color */
+        }
+
+        .store-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .store-icon {
+            height: 80px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .store-icon img {
+            max-height: 100%;
+            max-width: 100%;
+            filter: grayscale(0.3);
+            transition: var(--transition);
+        }
+
+        .store-card:hover .store-icon img {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        .store-card h3 {
+            font-size: 1.4rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .store-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Social Media Section - 2nd */
+        .social-media {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+        }
+
+        .social-media .section-title h2 {
+            color: white;
+        }
+
+        .social-media .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .social-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            display: block;
+            color: white;
+        }
+
+        .social-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon {
+            height: 80px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .social-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .social-card p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* About Section - 3rd */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 400px;
+            background: #4072AF; /* Updated to your logo color */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .about-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--light) 0%, #eef2f7 100%);
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 60px;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .contact-details {
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            display: flex;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            margin-right: 20px;
+            color: var(--secondary); /* Updated to your logo color */
+            font-size: 1.3rem;
+            width: 25px;
+            margin-top: 5px;
+        }
+
+        .business-hours {
+            margin-top: 40px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .business-hours h4 {
+            margin-bottom: 15px;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+
+        .business-hours p {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .business-hours p span {
+            font-weight: 600;
+            color: var(--secondary); /* Updated to your logo color */
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .form-control:focus {
+            border-color: var(--secondary); /* Updated to your logo color */
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(64, 114, 175, 0.2); /* Updated to your logo color */
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+
+        .footer-about {
+            max-width: 350px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .footer-logo-text span {
+            color: var(--secondary); /* Updated to your logo color */
+        }
+
+        .footer-about p {
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h4::after, .footer-contact h4::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--secondary), var(--accent)); /* Updated to your logo color */
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            margin-bottom: 15px;
+            color: #bbb;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--secondary); /* Updated to your logo color */
+            width: 20px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Popup Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 50px 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            animation: modalFade 0.4s;
+            position: relative;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .modal-icon {
+            font-size: 4.5rem;
+            color: var(--secondary); /* Updated to your logo color */
+            margin-bottom: 25px;
+        }
+
+        .modal h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .modal p {
+            margin-bottom: 30px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1100px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about-image {
+                width: 100%;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+            
+            .footer-about, .footer-links, .footer-contact {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav {
+                margin-left: 0;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid #eee;
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 12px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .stores-grid, .social-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 120px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .stores-grid, .social-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 40px 25px;
+            }
+            
+            .animated-logo {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Fallback for browsers that don't support backdrop-filter */
+        @supports not (backdrop-filter: blur(10px)) {
+            .social-card {
+                background: rgba(45, 52, 64, 0.95);
+            }
+            
+            .modal {
+                background-color: rgba(0, 0, 0, 0.85);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="assets/logob.png" alt="Paravon Hub Logo">
+                <div class="logo-text">Paravon <span>Hub</span></div>
+            </div>
+            
+            <!-- Navigation Moved to Left Side -->
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#stores">Our Stores</a></li>
+                    <li><a href="#social">Social Media</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </nav>
+            
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h1>Simple, Reliable, and Enjoyable Shopping</h1>
+            <p>Quality products you can trust, delivered right to your doorsteps</p>
+            <a href="#stores" class="btn">Shop Now</a>
+            
+            <div class="logo-animation">
+                <div class="animated-logo">Paravon Hub</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stores Section - 1st -->
+    <section class="section" id="stores">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Stores</h2>
+                <p>Shop with us across multiple platforms</p>
+            </div>
+            
+            <div class="stores-grid">
+                <div class="store-card" data-store="TikTok Shop">
+                    <div class="store-icon">
+                        <img src="assets/tiktok.png" alt="TikTok Shop">
+                    </div>
+                    <h3>TikTok Shop</h3>
+                    <p>Trending products and exclusive deals</p>
+                </div>
+                
+                <div class="store-card" data-store="eBay">
+                    <div class="store-icon">
+                        <img src="assets/EBay.png" alt="eBay">
+                    </div>
+                    <h3>eBay</h3>
+                    <p>Wide selection with competitive pricing</p>
+                </div>
+                
+                <div class="store-card" data-store="Amazon">
+                    <div class="store-icon">
+                        <img src="assets/amazon.png" alt="Amazon">
+                    </div>
+                    <h3>Amazon</h3>
+                    <p>Fast delivery with Prime benefits</p>
+                </div>
+                
+                <div class="store-card" data-store="Shopify">
+                    <div class="store-icon">
+                        <img src="assets/Shopify.png" alt="Shopify">
+                    </div>
+                    <h3>Shopify</h3>
+                    <p>Direct from our online store</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Section - 2nd -->
+    <section class="section social-media" id="social">
+        <div class="container">
+            <div class="section-title">
+                <h2>Follow Us</h2>
+                <p>Stay connected with Paravon Hub</p>
+            </div>
+            
+            <div class="social-grid">
+                <a href="https://www.linkedin.com/company/paravonhubltd/" target="_blank" rel="noopener" class="social-card">
+                    <div class="social-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <h3>LinkedIn</h3>
+                    <p>Professional updates and company news</p>
+                </a>
+                
+                <a href="https://x.com/paravonhubltd?s=21" target="_blank" rel="noopener" class="social-card">
+                    <div class="social-icon">
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                    <h3>Twitter</h3>
+                    <p>Latest announcements and promotions</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section - 3rd -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Paravon Hub</h2>
+                <p>Learn more about our mission and values</p>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>We started Paravon Hub with one clear goal: to make shopping simple, reliable, and enjoyable for everyone. In today's fast-paced world, people want quality products they can trust, delivered right to their doorsteps. That's where we come in.</p>
+                    
+                    <p>At Paravon Hub, we bring together a wide range of products from everyday essentials to trending items so you can find everything you need in one place. Whether you shop with us on Amazon, eBay, TikTok Shop, or our Shopify store, we're committed to giving you great value, reliable service, and a seamless shopping experience.</p>
+                    
+                    <p>The name Paravon Hub stands for excellence, and that's exactly what we aim to deliver every order, every time. As we continue to grow, our mission remains the same: to provide products that make life easier, better, and more enjoyable for our customers.</p>
+                </div>
+                
+                <div class="about-image">
+                    <img src="assets/Wlogo.png" alt="Paravon Hub">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for any inquiries</p>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <p>Office 14373, 182–184 High Street North,<br>East Ham, London, United Kingdom</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <p>+44 20 3432 3818</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p>paravonhubltd@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="business-hours">
+                        <h4>Business Hours</h4>
+                        <p><span>Monday - Friday:</span> 9AM - 5PM</p>
+                        <p><span>Saturday:</span> 10AM - 3PM</p>
+                        <p><span>Sunday:</span> Closed</p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/mnnbwdzn" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="assets/Wlogo.png" alt="Paravon Hub Logo">
+                        <div class="footer-logo-text">Paravon <span>Hub</span></div>
+                    </div>
+                    <p>Making shopping simple, reliable, and enjoyable for everyone with quality products delivered right to your doorsteps.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#stores">Our Stores</a></li>
+                        <li><a href="#social">Social Media</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="privacy.html" rel="noopener">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Office 14373, 182–184 High Street North, East Ham, London, UK</p>
+                    <p><i class="fas fa-phone"></i> +44 20 3432 3818</p>
+                    <p><i class="fas fa-envelope"></i> paravonhubltd@gmail.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 Paravon Hub LTD. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Store Popup Modal -->
+    <div class="modal" id="storeModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-store"></i>
+            </div>
+            <h3 id="modalStoreName">Store Coming Soon</h3>
+            <p>The <span id="storeNameSpan">store</span> is currently not available but will be coming soon! Kindly fill out the form on our contact page and we will update you when this store becomes available.</p>
+            <a href="#contact" class="btn" id="modalContactBtn">Contact Us</a>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navMenu').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('#navMenu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // In a real implementation, you would send this data to Formspree
+            // For now, we'll just show an alert
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Store popup functionality
+        const storeCards = document.querySelectorAll('.store-card');
+        const modal = document.getElementById('storeModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalStoreName = document.getElementById('modalStoreName');
+        const storeNameSpan = document.getElementById('storeNameSpan');
+        const modalContactBtn = document.getElementById('modalContactBtn');
+
+        storeCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const storeName = this.getAttribute('data-store');
+                modalStoreName.textContent = `${storeName} Coming Soon`;
+                storeNameSpan.textContent = storeName;
+                modal.style.display = 'flex';
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        modalContactBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside the content
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.padding = '5px 0';
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
