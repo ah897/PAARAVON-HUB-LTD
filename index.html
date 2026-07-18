@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png"  href="assets/Hlogob.png">
-      <title>Paravon Hub</title>
+    <title>Paravon Hub</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset and Base Styles */
@@ -874,7 +874,7 @@
             </div>
             
             <div class="stores-grid">
-                <div class="store-card" data-store="TikTok Shop">
+                <div class="store-card" onclick="window.open('https://vt.tiktok.com/ZN81rFH8q/','_blank')">
                     <div class="store-icon">
                         <img src="assets/tiktok.png" alt="TikTok Shop">
                     </div>
@@ -882,13 +882,22 @@
                     <p>Trending products and exclusive deals</p>
                 </div>
                 
-                <div class="store-card" data-store="eBay">
+                <div class="store-card" onclick="window.open('https://www.ebay.co.uk/usr/par-249642','_blank')">
                     <div class="store-icon">
                         <img src="assets/EBay.png" alt="eBay">
                     </div>
                     <h3>eBay</h3>
                     <p>Wide selection with competitive pricing</p>
                 </div>
+
+                <div class="store-card" onclick="window.open('https://paravonhub.etsy.com','_blank')">
+                    <div class="store-icon">
+                        <img src="assets/etsy.png" alt="Etsy">
+                    </div>
+                    <h3>Etsy</h3>
+                    <p>Handpicked products and exclusive offers</p>
+                </div>
+
                 
                 <div class="store-card" data-store="Amazon">
                     <div class="store-icon">
@@ -1144,13 +1153,18 @@
         const modalContactBtn = document.getElementById('modalContactBtn');
 
         storeCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const storeName = this.getAttribute('data-store');
-                modalStoreName.textContent = `${storeName} Coming Soon`;
-                storeNameSpan.textContent = storeName;
-                modal.style.display = 'flex';
-            });
-        });
+    card.addEventListener('click', function () {
+
+        // Cards with direct links won't have data-store
+        const storeName = this.getAttribute('data-store');
+
+        if (!storeName) return;
+
+        modalStoreName.textContent = `${storeName} Coming Soon`;
+        storeNameSpan.textContent = storeName;
+        modal.style.display = 'flex';
+    });
+});
 
         closeModal.addEventListener('click', function() {
             modal.style.display = 'none';
@@ -1180,8 +1194,4 @@
         });
     </script>
 </body>
-
 </html>
-
-
-
